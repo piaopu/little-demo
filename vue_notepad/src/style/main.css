@@ -1,0 +1,411 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    list-style: none;
+    text-decoration: none;
+
+}
+html{
+    /*html、body的高度100%，不然vue-memo的高度100%不会成功*/
+    height: 100%;
+    font-family: Song;
+    color: #696969;
+}
+body{
+    height: 100%;
+    padding-top: 50px;
+    background: url("../images/pixels.png");
+}
+#vue-meomo{
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding:0;
+
+}
+/*     最上方的导航条   */
+.navbar{
+    position: fixed;
+    background: #F5F5F5;
+    height: 50px;
+    width:100%;
+    top:0px;
+    left: 0px;
+    color: #696969;
+    font-size: 18px;
+    z-index:10;
+}
+.navbar-container:after{
+    /*为了清楚浮动*/
+    content: "";
+    display: block;
+    height: 0;
+    clear:both;
+    visibility: hidden;
+}
+
+.navbar-container{
+    position: relative;
+    height: 50px;
+    width: 100%;
+}
+.navbar-name{
+    line-height: 50px;
+    float:left;
+    text-align: center;
+    width: 200px;
+    margin-left: 50px;
+}
+
+.navbar-menu {
+    line-height: 50px;
+    float:right;
+    width: 600px;
+    margin-right: 50px;
+}
+.menu-ul{
+    line-height: 50px;
+    width: 300px;
+}
+.menu-li{
+    display: inline;
+    float: left;
+    line-height: 50px;
+    width: 110px;
+    text-align: center;
+}
+.menu-li:hover{
+    background: #D3D3D3;
+}
+
+.menu-li:after{
+    content: "";
+    display: block;
+    height: 0;
+    clear:both;
+    visibility: hidden;
+}
+.navbar-menu>input{
+    height: 30px;
+    margin-left: 30px;
+    border: #C0C0C0 1px solid;
+    border-radius: 5px;
+    padding-left: 5px;
+    font-size: 16px;
+}
+.count{
+    float: none;
+    border-radius: 5px;
+    min-width: 10px;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+}
+
+.menu-ul-ul{
+    width: 110px;
+    display: none;
+}
+.li-c{
+    margin-left: 40px;
+}
+
+.menu-li:hover>ul{
+    background: #F5F5F5;
+    display: block;
+}
+.menu-li-li{
+    height: 50px;
+    text-align: center;
+}
+.menu-li-li:hover{
+    background: #A9A9A9;
+}
+/*     备忘录全部展示   */
+.memos{
+    z-index: 5;
+    width: 100%;
+    line-height: 100%;
+    position: relative;
+}
+
+#meomolist{
+    margin-left:8%;
+    margin-right:8%;
+    display: flex;
+    flex-flow: wrap;
+}
+#meomolist:after{
+    height: 0;
+    content: "";
+    visibility: hidden;
+}
+/*     单个memo   */
+.memo-container{
+    margin: 10px;
+    width: 23%;
+    height: 350px;
+    background: white;
+    border: 1px solid #A9A9A9;
+    border-radius: 6px;
+}
+
+.memo{
+    height: 100%;
+    padding: 5px;
+}
+
+.memo-heading{
+    height: 10%;
+    line-height: 33px;
+    text-align: left;
+}
+h4{
+    color: #363636;
+    border-bottom: 1px solid #CFCFCF;
+    width: 70%;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    display: inline;
+}
+.memo-heading-b{
+    width: 30%;
+    float: right;
+    text-align: center;
+}
+.b-modify{
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    background-image: url("../images/icons/icon-edit.png");
+    opacity: 60%;
+    background-repeat:no-repeat;
+    background-size: 20px 20px;
+    border: none;
+    margin: 5px;
+}
+.b-modify:hover{
+    opacity: 1;
+    border: none;
+}
+.b-delete{
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    background-image: url("../images/icons/icon-delete.png");
+    opacity: 60%;
+    background-repeat:no-repeat;
+    background-size: 20px 20px;
+    border: none;
+    margin: 5px;
+}
+.b-delete:hover{
+    opacity: 1;
+    border: none;
+}
+.memo-info{
+    height: 10%;
+    line-height: 33px;
+}
+.memo-info:after{
+    content: "";
+    display: block;
+    height: 0;
+    clear:both;
+    visibility: hidden;
+}
+
+.memo-info-time{
+    width: 150px;
+    font-size: 12px;
+    color: #363636;
+    font-weight: lighter;
+    text-align: left;
+    margin-left: 10px;
+    float: left;
+}
+.memo-info-cat{
+    font-size: 12px;
+    color: #363636;
+    font-weight: lighter;
+    margin-right: 10px;
+    float: right;
+}
+
+.memo-content{
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 75%;
+    overflow: auto;
+    color: #4F4F4F;
+    line-height: normal;
+    white-space: pre-line;
+}
+
+
+/*     新建memo的Editor   */
+#new-layer{
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    background:rgba(79,79,79,.5);
+    top: 0;
+    left: 0;
+    border: none;
+    position: absolute;
+}
+
+.new-memo{
+    z-index: 16;
+    width: 300px;
+    height: 380px;
+    background: rgba(255,255,255,1);
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0 #f8f8f8;
+    position: absolute;
+    top:10%;
+    left: 40%;
+    border:1px solid white;
+}
+
+.form-control{
+    border:1px solid #CFCFCF;
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin: 10px;
+    color: #696969;
+}
+input:focus{
+    border:1px solid #5CACEE;
+    outline: none;
+    box-shadow: 0 0 6px 0 #B0E2FF;
+}
+.form-control:focus{
+    border:1px solid #5CACEE;
+    outline: none;
+    box-shadow: 0 0 6px 0 #B0E2FF;
+}
+
+button:focus{
+    border:1px solid ;
+    outline: none;
+}
+
+.editor-title{
+    height: 26px;
+    width: 40%;
+    line-height: 26px;
+    font-size: 14px;
+
+}
+.text-content{
+    height: 78%;
+    width: 85%;
+    margin-top: 0;
+}
+
+.dropdown{
+    position: absolute;
+    top: 10px;
+    display: inline;
+    height: 40px;
+}
+
+.e-btn{
+    height: 40px;
+    width: 60px;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+    background: white;
+    font-size: 14px;
+    color: #696969;
+}
+.dropdown-menu{
+    background: white;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 3px;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+    transition:all .2s ease-in-out;
+}
+.dropdown-menu>li:hover{
+    background: #F5F5F5;
+}
+
+.tools{
+    height: 40px;
+    width: 55px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    line-height: 40px;
+    text-align: center;
+    display: block;
+}
+
+.save{
+    background: url("../images/icons/icon-save.png") no-repeat;
+    opacity: .5;
+    height: 20px;
+    width: 20px;
+    margin-top: 10px;
+    margin-right: 5px;
+    display: inline-block;
+}
+.cancel{
+    background: url("../images/icons/icon-cancel.png") no-repeat;
+    opacity: .5;
+    height: 20px;
+    width: 20px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.editor-memo{
+    z-index: 16;
+    width: 300px;
+    height: 380px;
+    background: rgba(255,255,255,1);
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0 #f8f8f8;
+    position: absolute;
+    top:10%;
+    left: 40%;
+    border:1px solid white;
+}
+
+/*    编辑  */
+#editor-layer{
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    background:rgba(79,79,79,.5);
+    top: 0;
+    left: 0;
+    border: none;
+    position: absolute;
+}
+
+.editor-memo{
+    z-index: 16;
+    width: 300px;
+    height: 380px;
+    background: rgba(255,255,255,1);
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0 #f8f8f8;
+    position: absolute;
+    top:10%;
+    left: 40%;
+    border:1px solid white;
+}
